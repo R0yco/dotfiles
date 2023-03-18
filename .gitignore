@@ -4,4 +4,4 @@
 !.gitignore
 
 # manage nvim
-!nvim/
+!nvim/**
