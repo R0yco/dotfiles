@@ -1,2 +1,7 @@
 *
 !*/
+# manage gitignore
+!.gitignore
+
+# manage nvim
+!nvim/
