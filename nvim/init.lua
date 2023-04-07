@@ -12,6 +12,7 @@ vim.opt.breakindent = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+vim.opt.syntax = "on"
 
 -- ######################################################
 -- #                     KEY BINDINGS                   #
@@ -21,6 +22,7 @@ vim.g.mapleader = ' '
 vim.keymap.set({'n', 'x'}, 'cp', '"+y') -- copy to system clipboard with cp
 vim.keymap.set({'n', 'x'}, 'cv', '"+p') -- paste from system clipboard with cv
 vim.keymap.set({'n', 'x'}, 'x', '"_x')  -- modify x to not store in register
+vim.keymap.set({'n', 't'}, '<leader>t',"<cmd>ToggleTerm<cr>")
 
 -- ######################################################
 -- #                       PLUGINS                      #
@@ -43,7 +45,7 @@ end
 
 function lazy.setup(plugins)
   -- You can "comment out" the line below after lazy.nvim is installed
-  lazy.install(lazy.path)
+  -- lazy.install(lazy.path)
 
   vim.opt.rtp:prepend(lazy.path)
   require('lazy').setup(plugins, lazy.opts)
@@ -57,6 +59,8 @@ lazy.setup({
   {'EdenEast/nightfox.nvim'},
   {'nvim-lualine/lualine.nvim'},
   {'nvim-treesitter/nvim-treesitter', build = ":TSUpdate"},
+  {'akinsho/toggleterm.nvim', version = "*", config = true},
+  {'lervag/vimtex', lazy=false},
 })
 
 -- ######################################################
@@ -83,3 +87,21 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+vim.g.vimtex_compiler_latexmk = {
+	 build_dir = './bin/',
+	 callback= 1,
+	 continuous= 1,
+	 executable= 'latexmk',
+	 hooks= {},
+	 options= {
+	   '-verbose',
+	   '-file-line-error',
+	   '-synctex=1',
+	   '-interaction=nonstopmode',
+   },
+	}
+vim.g.vimtex_compiler_latexmk_engines = {
+	 _= '-xelatex',
+	}
+vim.g.vimtex_view_method = 'zathura'
+--vim.g.vimtex_syntax_enabled = 'false'
